@@ -1,5 +1,4 @@
 import './assets/css/main.css'
-import './assets/scripts/jsmediatags'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

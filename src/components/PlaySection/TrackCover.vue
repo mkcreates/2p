@@ -10,7 +10,7 @@ const img = `bg-[url(${playerStore.currentTrack.cover})]`
 <template>
   <div class="w-[75%] xs:w-[40%] sm:w-[50%] bg-black/20 aspect-square mx-auto rounded-2xl mb-5">
     <div class="flex items-center justify-center h-full bg-[url(../img/track-bg.svg)] bg-cover bg-center">
-      <div class="w-[80%] h-fit border border-white/10 rounded-full">
+      <div class="relative w-[80%] h-fit border border-white/10 rounded-full bg-black/70">
         <img
           v-if="playerStore.currentTrack.cover"
           :src="playerStore.currentTrack.cover" class="trackcover opacity-90"
@@ -21,6 +21,10 @@ const img = `bg-[url(${playerStore.currentTrack.cover})]`
           src="../../assets/img/logo.svg" class="trackcover grayscale opacity-20"
           :class="{'spin-animation': playerStore.isPlaying}"
         />
+
+        <div class="absolute top-0 flex items-center justify-center bg-none w-full h-full">
+          <div class="w-6 h-6 bg-black rounded-full shadow-2xl border-4 border-white/10"></div>
+        </div>
       </div>
     </div>
   </div>

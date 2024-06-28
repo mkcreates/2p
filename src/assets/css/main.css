@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --main-color: #FF92F8;
+  --main-color: #bd51b7;
   --main-color-dark: #9e4399;
+  --text-color: rgba(255, 255, 255, 0.75)
 }
 
 html,body{
@@ -19,13 +20,27 @@ html,body{
     scroll-behavior: smooth;
     transition: all 0.2s;
 }
+*:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
 
 *::-webkit-scrollbar{
-  @apply w-[2px] xs:w-[6px] bg-transparent
+  @apply w-[6px] bg-transparent
+}
+body.mobile *::-webkit-scrollbar{
+  @apply w-[2px]
 }
 *::-webkit-scrollbar-thumb{border-radius:10px;background:rgba(255,255,255,.2)}
 *::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.4)}
 
+/* apply mozila specific style to scrollbar */
+@-moz-document url-prefix() {
+  body * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.2) transparent;
+  }
+}
 
 input[type="range"]::-webkit-slider-runnable-track {
   height: 100%;
@@ -49,9 +64,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background-color: #333;
+  width: 14px;
+  height: 14px;
+  background-color: var(--main-color);
   border-radius: 50%;
   cursor: pointer;
 }

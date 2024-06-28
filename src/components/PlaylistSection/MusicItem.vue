@@ -87,16 +87,20 @@ const addFavourite = (name) => {
 <template>
   <div
     @click="playAudio(file)"
+    :id="file.id"
     class="flex items-center max-w-full group rounded-xl p-3 cursor-pointer duration-300"
-    :class="{'bg-neutral-900': isCurrentlyPlaying}"
+    :class="{'bg-neutral-900 marquee': isCurrentlyPlaying}"
   >
     <img v-if="file.cover" :src="file.cover" width="45" height="45" class="listImg" />
     <img v-else src="../../assets/img/logo.svg" width="45" height="45" class="listImg" />
 
-    <div class="grow relative text-white/75 overflow-x-hidden mr-2">
-      <p class="text-sm font-semibold mb-0.5 whitespace-nowrap max-w-full">
-        {{ file.title ? file.title : file.name }}
-      </p>
+    <div class="grow relative text-[--text-color] overflow-x-hidden mr-2">
+      <div class="mq w-fit">
+        <p class="text-sm font-semibold mb-0.5 whitespace-nowrap max-w-full">
+          {{ file.title ? file.title : file.name.replace(/_/g, ' ') }}
+        </p>
+      </div>
+
       <p class="flex items-center text-xs text-white/40">
           {{ file.artist }}
       </p>
@@ -119,5 +123,19 @@ const addFavourite = (name) => {
 <style>
 .listImg {
   @apply shrink-0 opacity-70 mr-4 rounded-full object-cover aspect-square border border-white/10
+}
+
+.marquee:hover .mq p {
+  padding-left: 100%;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-170%);
+  }
 }
 </style>

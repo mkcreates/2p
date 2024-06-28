@@ -23,6 +23,13 @@ onMounted(() => {
   document.querySelectorAll('*').forEach((element) => 
       element.setAttribute('draggable', 'false')
   )
+
+  // This code checks if user's device is mobile, then adds 'mobile' class to body,
+  // So the scrollbar can be styled to be of less width in mobile devices
+  // Check if device is a mobile device by checking user agent
+  const isMobile = /iPhone|iPad|iPod|Android|Mobi/i.test(navigator.userAgent)
+  // If true add class 'mobile' to body
+  if (isMobile) document.body.classList.add('mobile')
 })
 </script>
 
@@ -30,12 +37,12 @@ onMounted(() => {
   <BubbleBackground />
   
   <div class="relative z-10 h-full max-w-5xl mx-auto">
-      <div class="relative md:flex w-full h-full overflow-hidden">
-        
-        <PlaySection />
-        <PlaylistSection />
+    <div class="relative md:flex w-full h-full overflow-hidden">
 
-      </div>
+      <PlaySection />
+      <PlaylistSection />
+
+    </div>
   </div>
   
   <DragFilesContainer />

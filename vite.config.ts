@@ -10,16 +10,10 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
-      strategies: 'generateSW',
-      injectRegister: 'auto',
-      workbox: {
-        clientsClaim: true,
-        skipWaiting: true
-      },
       manifest: {
         name: '2Play',
         short_name: '2Play',
-        description: 'Enjoy your favorite music with 2Play! Just drag and drop your audio files, and our player will instantly play them, showing album covers and song details. Plus, it works offline on any device!',
+        description: 'Enjoy your favorite music in style with 2Play! Just drag and drop your audio files, and 2Play will instantly generate a playlist, showing album covers and song details. Plus, it works offline and is installable on any device!',
         theme_color: '#171717',
         icons: [
           {
@@ -46,6 +40,32 @@ export default defineConfig({
             "type": "image/png",
             "purpose": "maskable"
           }
+        ],
+      },
+      workbox: {
+        // Set up work box to cache google font for PWA (offline use)
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'google-fonts-stylesheets',
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-webfonts',
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+              expiration: {
+                maxEntries: 30,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+              },
+            },
+          },
         ],
       },
     })

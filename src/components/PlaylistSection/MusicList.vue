@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watchEffect } from 'vue'
 import { useGlobalStore } from '../../stores/global'
 import { usePlayerStore } from '../../stores/player'
+import { useAutoAnimate } from '@formkit/auto-animate/vue'
 
 import MusicItem from './MusicItem.vue'
+import { PhHeadphones } from "@phosphor-icons/vue"
 
 // initialise state stores.
 const playerStore = usePlayerStore()
@@ -29,6 +31,23 @@ const playlist = computed(() => {
   }
 })
 
+
+// Initialize v-auto-animate helpers and store references
+const [parent, enable] = useAutoAnimate()
+
+// Watch for changes in the application state
+watchEffect(() => {
+  // Check if new files are currently being loaded into the playlist
+  if (!playerStore.audioListLoading) {
+    // If no files are being loaded, enable animations for the playlist
+    enable(true)
+  } else {
+    // If files are being loaded, disable animations to ensure better performance
+    enable(false)
+  }
+})
+
+
 onMounted(() => {
   // Retrieve the favorite playlist from local storage
   const favStorage = localStorage.getItem('favourites')
@@ -42,13 +61,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="grow overflow-y-auto">
+  <div class="grow overflow-y-auto" ref="parent">
     
     <!--When no files in playlist-->
     <div
         v-if="!playerStore.playlist.length"
-        class="text-white/75 text-center text-sm mt-10"
+        class="text-[--text-color] text-center text-sm mt-10"
       >
+        <PhHeadphones weight="fill" class="text-[7rem] text-white/10 w-fit mx-auto" />
         No tracks in playlist.
     </div>
     

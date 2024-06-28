@@ -69,6 +69,7 @@ const handleFiles = async (files: FileList, playerStore): void => {
             album: album || 'Unknown Album',
             year: year || 'Unknown Year',
             cover: cover || null,
+            id: 'audio_' + Date.now(),
           }
           
           // Check if the processed file is not already in the playlist

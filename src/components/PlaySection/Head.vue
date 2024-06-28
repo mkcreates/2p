@@ -28,12 +28,12 @@ const filesSelectd = (e) => {
 <template>
   <div class="flex justify-between items-center px-4 pb-3">
   
-    <img src="../../assets/img/logo.svg" class="w-8" />
+    <img src="../../assets/img/logo-long.svg" class="w-[5.5rem]" />
 
     <div class="flex justify-center items-center">
       <button
         @click="addMusic()"
-        class="flex items-center justify-center bg-black/20 text-white/75 text-sm sm:text-xs px-3 py-2 rounded-full"
+        class="flex items-center justify-center bg-black/20 text-[--text-color] text-sm sm:text-xs px-3 py-2 rounded-full"
         >
         <PhPlus class="mr-1" /> Add Music
         <input type="file" @change="filesSelectd" id="selectAudio" class="hidden" accept="audio/*" multiple>
@@ -41,7 +41,7 @@ const filesSelectd = (e) => {
 
       <button
         @click="playerStore.playlistToggle = true"
-        class="circBtn md:hidden ml-3"
+        class="circBtn md-hidden ml-3"
       >
         <PhPlaylist />
       </button>
@@ -52,9 +52,12 @@ const filesSelectd = (e) => {
 
 <style>
 .circBtn {
-  @apply flex items-center justify-center p-2 bg-black/30 text-lg sm:text-base text-white/75 rounded-full duration-300 active:scale-125
+  @apply flex items-center justify-center p-2 bg-black/30 text-lg sm:text-base text-[--text-color] rounded-full duration-300 active:scale-125
 }
 .circBtn.active {
-  @apply bg-[#FF92F8] text-white
+  @apply bg-[--main-color] text-white
+}
+.circBtn.md-hidden {
+  @apply md:hidden
 }
 </style>

@@ -56,7 +56,7 @@ export const usePlayerStore = defineStore('player', () => {
   
   
   // Declare a global variable to hold the WaveSurfer instance
-  //window.wavesurfer
+  window.wavesurfer
   
   const play = (file) => {
     // update data of song currently playing with payload
@@ -75,7 +75,7 @@ export const usePlayerStore = defineStore('player', () => {
     window.wavesurfer = WaveSurfer.create({
       container: '#waveform',
       waveColor: 'rgba(255, 255, 255, 0.75)',
-      progressColor: 'rgb(255, 146, 248)',
+      progressColor: '#bd51b7',
       url: file.fileURL,
       autoplay: true,
       barWidth: 2.5,
@@ -104,6 +104,9 @@ export const usePlayerStore = defineStore('player', () => {
 
       // Format the duration into "mm:ss" format and store it in the audioTime state object
       audioTime.value.duration = formatAudioTime(duration)
+
+      // Scroll currently playing audio to view in playlist
+      document.getElementById(currentTrack.value.id).scrollIntoView({ block: 'nearest', behavior: 'smooth' })
     })
     
     

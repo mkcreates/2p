@@ -11,7 +11,7 @@ const playerStore = usePlayerStore()
       {{ playerStore.audioTime.elapsedTime }}
     </span>
     
-    <div class="inline-flex bg-white/20 text-white text-xs rounded-full">
+    <button class="inline-flex bg-white/20 text-white text-xs rounded-full">
       <div
         @click="playerStore.progressBar = 'waveform'"
         class="trackSwitch"
@@ -23,9 +23,9 @@ const playerStore = usePlayerStore()
         class="trackSwitch"
         :class="{'active': playerStore.progressBar === 'slider'}"
       >Slider</div>
-    </div>
+    </button>
     
-    <span class="text-white/75">
+    <span class="text-[--text-color]">
       {{ playerStore.audioTime.duration }}
     </span>
   </div>
@@ -36,6 +36,6 @@ const playerStore = usePlayerStore()
   @apply py-0.5 px-2 rounded-full
 }
 .trackSwitch.active {
-  @apply bg-[--main-color]
+  @apply bg-[--main-color-dark]
 }
 </style>

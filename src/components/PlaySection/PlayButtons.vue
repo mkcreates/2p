@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 import { useGlobalStore } from '../../stores/global'
 
@@ -113,6 +113,38 @@ const order = () => {
     playerStore.toRepeat = false
   }
 }
+
+
+onMounted(() => {
+  // Add an event listener for keyboard presses
+  window.addEventListener('keydown', (e) => {
+    // When the space key is pressed
+    if (e.key === ' ' || e.key === 'Space') {
+      e.preventDefault()
+      // If the player is paused, play; otherwise, pause
+      playerStore.isPaused ? window.wavesurfer.play() : window.wavesurfer.pause()
+    }
+
+    // When ArrowRight or ArrowDown keys are pressed, move to the next track in the playlist
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') forward()
+
+    // When ArrowLeft or ArrowUp keys are pressed, move to the previous track in the playlist
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') back()
+
+    // When Ctrl + o is pressed, open the file select dialog
+    if (e.ctrlKey && (e.key === 'o' || e.key === 'O')) {
+      e.preventDefault()
+      // Trigger the click event for the file select input element
+      document.getElementById('selectAudio').click()
+    }
+
+    // When the Ctrl key is pressed, toggle the repeat function
+    if (e.ctrlKey) {
+      e.preventDefault()
+      repeat()
+    }
+  })
+})
 </script>
 
 <template>
@@ -122,12 +154,12 @@ const order = () => {
       @click="repeat()"
       :class="{'active': playerStore.toRepeat}"
     >
-      <PhRepeatOnce />
+      <PhRepeatOnce weight="fill" />
     </button>
     
     <!--prev-->
-    <button @click="back()">
-      <PhSkipBack />
+    <button @click="back()" id="back">
+      <PhSkipBack weight="fill" />
     </button>
     
     <!--play/pause-->
@@ -135,18 +167,18 @@ const order = () => {
       v-if="!playerStore.isPlaying"
       @click="play()" class="big"
     >
-      <PhPlay />
+      <PhPlay weight="fill" />
     </button>
     <button
       v-else
       @click="pause()" class="big"
     >
-      <PhPause />
+      <PhPause weight="fill" />
     </button>
     
     <!--next-->
     <button @click="forward()">
-      <PhSkipForward />
+      <PhSkipForward weight="fill" />
     </button>
     
     <!--order-->
@@ -154,7 +186,7 @@ const order = () => {
       @click="order()"
       :class="{'active': playerStore.toOrder}"
     >
-      <PhArrowsLeftRight />
+      <PhArrowsLeftRight weight="fill" />
     </button>
   </div>
 </template>
@@ -164,7 +196,7 @@ button {
   @apply w-9 h-9 flex items-center justify-center bg-black/20 rounded-full mx-2 hover:bg-white/10 active:bg-black/20
 }
 button svg {
-  @apply text-white/75 text-sm
+  @apply text-[--text-color] text-sm
 }
 
 button.big {

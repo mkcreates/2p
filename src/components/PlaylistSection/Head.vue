@@ -2,7 +2,7 @@
 import { usePlayerStore } from '../../stores/player'
 import { useGlobalStore } from '../../stores/global'
 
-import { PhArrowLeft, PhMagnifyingGlass, PhHeart } from "@phosphor-icons/vue"
+import { PhArrowLeft, PhMagnifyingGlass, PhHeart, PhX } from "@phosphor-icons/vue"
 
 // initialise state stores.
 const playerStore = usePlayerStore()
@@ -16,8 +16,12 @@ const search = (value) => {
   globalStore.favouritesFilter = false
 }
 
+
 // When favourite filter button is clicked
 const showFavourites = (value) => {
+  // If playlist is empty, exit function (do nothing)
+  if (!playerStore.playlist.length) return
+
   // Toggle filter state
   globalStore.favouritesFilter = !globalStore.favouritesFilter
   // Turn off search filter
@@ -29,19 +33,26 @@ const showFavourites = (value) => {
   <div class="flex items-center mb-5">
     <button
       @click="playerStore.playlistToggle = false"
-      class="circBtn flex md:hidden mr-3"
+      class="circBtn md-hidden mr-3"
     >
       <PhArrowLeft />
     </button>
 
-    <div class="grow flex items-center text-white/75">
+    <div class="grow flex items-center text-[--text-color]">
       <PhMagnifyingGlass class="text-base mr-3" />
       <input
-        @input="search($event.target.value)"
+        @input="search(globalStore.searchPlaylist)"
+        v-model="globalStore.searchPlaylist"
         type="text"
         class="w-full bg-transparent text-sm xs:text-xs"
         placeholder="Search for title or artist.."
       >
+
+      <PhX
+        v-if="globalStore.searchPlaylist"
+        @click="globalStore.searchPlaylist = null"
+        class="text-lg mr-3 cursor-pointer"
+      />
     </div>
 
     <button
@@ -49,7 +60,7 @@ const showFavourites = (value) => {
       class="circBtn"
       :class="{'active': globalStore.favouritesFilter}"
     >
-      <PhHeart class="mt-0.5" />
+      <PhHeart />
     </button>
   </div>
 </template>
