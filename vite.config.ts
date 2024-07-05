@@ -10,6 +10,11 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
+      includeAssets: [
+        'src/assets/img/*.png',
+        'src/assets/img/*.svg',
+        'src/assets/css/*.ttf',
+      ],
       manifest: {
         name: '2Play',
         short_name: '2Play',

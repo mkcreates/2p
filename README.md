@@ -1,14 +1,19 @@
-# 2play
+# 2Play - Music Player
 
-This template should help get you started developing with Vue 3 in Vite.
+![App Logo](/public/social.png)
 
-## Recommended IDE Setup
+Enjoy your favorite music in style with 2Play! Just drag and drop your audio files, and 2Play will instantly generate a playlist, showing album covers and song details. Plus, it works offline and is installable on any device!
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Type Support for `.vue` Imports in TS
+[![View App - 2Play](https://img.shields.io/badge/View_App-2PLAY-bd51b7?style=for-the-badge)](https://2play.netlify.app/) [![Screenshots - 2Play](https://img.shields.io/badge/Screenshots-Behance-1769ff?style=for-the-badge)](https://www.behance.net/gallery/188460931/Falconry-RSS-Reader)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+
+## Technologies Used
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/VS%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
 
 ## Customize configuration
 
@@ -30,12 +35,9 @@ npm run dev
 
 ```sh
 npm run build
-```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
+# Ignore type checking
+npm run build-only
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
