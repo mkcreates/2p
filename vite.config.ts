@@ -11,9 +11,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: [
-        'src/assets/img/*.png',
-        'src/assets/img/*.svg',
-        'src/assets/css/*.ttf',
+        'assets/*.png',
+        'assets/*.svg',
       ],
       manifest: {
         name: '2Play',
@@ -66,7 +65,19 @@ export default defineConfig({
                 statuses: [0, 200],
               },
               expiration: {
-                maxEntries: 30,
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+              },
+            },
+          },
+          // Cache images (offline use)
+          {
+            urlPattern: /.*\.(?:png|svg)/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'images',
+              expiration: {
+                maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
               },
             },
