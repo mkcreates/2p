@@ -5,7 +5,7 @@
 Enjoy your favorite music in style with 2Play! Just drag and drop your audio files, and 2Play will instantly generate a playlist, showing album covers and song details. Plus, it works offline and is installable on any device!
 
 
-[![View App - 2Play](https://img.shields.io/badge/View_App-2PLAY-bd51b7?style=for-the-badge)](https://2play.netlify.app/) [![Screenshots - 2Play](https://img.shields.io/badge/Screenshots-Behance-1769ff?style=for-the-badge)](https://www.behance.net/gallery/188460931/Falconry-RSS-Reader)
+[![View App - 2Play](https://img.shields.io/badge/View_App-2PLAY-bd51b7?style=for-the-badge)](https://2play.netlify.app/)
 
 
 ## Technologies Used
